@@ -1,0 +1,287 @@
+/* Reading progress. Pinned to the very top of the viewport rather than the
+   header's edge, so it stays correct once the bar detaches into an island.
+   No scroll listener: it rides the document's own scroll timeline. */
+.progress {
+  display: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  .progress {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 70;
+    width: 100%;
+    height: 2px;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    background: linear-gradient(90deg, var(--brand), var(--brand-2), var(--brand-3));
+    animation: nav-progress linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+
+@keyframes nav-progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* --- Header --------------------------------------------------------------- */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  padding-top: 0;
+  padding-inline: 16px;
+  transition: padding-top 0.35s var(--ease);
+}
+
+.scrolled {
+  padding-top: 8px;
+}
+
+@media (min-width: 900px) {
+  .scrolled {
+    padding-top: 12px;
+  }
+}
+
+/* At rest the nav is a plain full-width bar. Once the page scrolls it lifts
+   into a bordered, blurred island — the cue that the header is now floating
+   over content rather than sitting on top of the page. */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  width: 100%;
+  max-width: var(--container);
+  height: var(--nav-h);
+  margin-inline: auto;
+  padding-inline: 6px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  transition:
+    max-width 0.35s var(--ease),
+    padding 0.35s var(--ease),
+    height 0.35s var(--ease),
+    background 0.35s var(--ease),
+    border-color 0.35s var(--ease),
+    box-shadow 0.35s var(--ease);
+}
+
+.scrolled .nav {
+  max-width: 1060px;
+  height: calc(var(--nav-h) - 6px);
+  padding-inline: 10px 10px;
+  border-color: var(--border);
+  background: rgba(10, 11, 16, 0.72);
+  backdrop-filter: blur(20px) saturate(170%);
+  -webkit-backdrop-filter: blur(20px) saturate(170%);
+  box-shadow:
+    0 10px 34px rgba(0, 0, 0, 0.36),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* No extra inset: header padding (16) + nav padding (6) already lands the logo
+   on the same 22px gutter the page content uses. */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* Hidden until there is genuinely room: below this the bar is already carrying
+   the logo, the language toggle, the contact button and the menu trigger. */
+.byline {
+  display: none;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-soft);
+  letter-spacing: 0.02em;
+}
+
+@media (min-width: 720px) {
+  .byline {
+    display: inline;
+  }
+}
+
+/* --- Links ---------------------------------------------------------------- */
+
+.links {
+  display: none;
+  align-items: center;
+  gap: 2px;
+}
+
+.link {
+  display: block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.89rem;
+  color: var(--text-muted);
+  transition:
+    color 0.22s var(--ease),
+    background 0.22s var(--ease);
+}
+
+.link:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.055);
+}
+
+/* The section currently under the middle of the viewport. */
+.linkActive {
+  color: var(--text);
+  background: rgba(var(--brand-rgb), 0.16);
+  box-shadow: inset 0 0 0 1px rgba(var(--brand-rgb), 0.3);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* Desktop only. On a phone this button crowded the bar and made the whole
+   header feel oversized, so the mobile path to contact is the menu sheet —
+   plus the hero CTA sitting right underneath it. */
+.cta {
+  display: none;
+  padding: 9px 17px;
+  font-size: 0.85rem;
+}
+
+.ctaIcon {
+  display: none;
+}
+
+.menuButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  transition: background 0.22s var(--ease);
+}
+
+.menuButton:hover {
+  background: var(--surface-strong);
+}
+
+/* --- Mobile sheet --------------------------------------------------------- */
+
+.sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 34px;
+  padding: 32px;
+  background: rgba(6, 7, 11, 0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  animation: sheet-in 0.25s var(--ease);
+}
+
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.sheetClose {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.sheetLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.sheetLinks a {
+  display: block;
+  padding: 4px 16px;
+  border-radius: 999px;
+  color: var(--text-muted);
+  transition: color 0.2s var(--ease);
+}
+
+.sheetLinks a:hover {
+  color: var(--text);
+}
+
+.sheetActive {
+  color: var(--text) !important;
+  background: rgba(var(--brand-rgb), 0.16);
+}
+
+/* Small phones: tighten every gutter so nothing is pushed off a 320px screen. */
+@media (max-width: 479px) {
+  .header {
+    padding-inline: 10px;
+  }
+
+  .nav {
+    gap: 8px;
+    padding-inline: 2px;
+  }
+
+  .scrolled .nav {
+    padding-inline: 8px;
+  }
+
+  .menuButton {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+@media (min-width: 900px) {
+  .links {
+    display: flex;
+  }
+
+  .cta {
+    display: inline-flex;
+  }
+
+  .ctaIcon {
+    display: block;
+  }
+
+  .menuButton {
+    display: none;
+  }
+}

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="PixlWorks">
+  <defs>
+    <linearGradient id="pw-white" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" />
+      <stop offset="1" stop-color="#e2e8f0" />
+    </linearGradient>
+    <linearGradient id="pw-blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7dd3fc" />
+      <stop offset="1" stop-color="#0ea5e9" />
+    </linearGradient>
+    <linearGradient id="pw-gray" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c7d0de" />
+      <stop offset="1" stop-color="#8d98ab" />
+    </linearGradient>
+    <linearGradient id="pw-yellow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fde047" />
+      <stop offset="1" stop-color="#f59e0b" />
+    </linearGradient>
+  </defs>
+
+  <!-- Dark plate so the mark reads on light and dark browser tabs alike. -->
+  <rect width="64" height="64" rx="15" fill="#0b0e16" />
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="14.25" fill="none"
+        stroke="#ffffff" stroke-opacity="0.12" stroke-width="1.5" />
+
+  <!-- Four pixels, one per brand colour: white, blue, grey, yellow. -->
+  <rect x="13" y="13" width="17" height="17" rx="4.5" fill="url(#pw-white)" />
+  <rect x="34" y="13" width="17" height="17" rx="4.5" fill="url(#pw-blue)" />
+  <rect x="13" y="34" width="17" height="17" rx="4.5" fill="url(#pw-gray)" />
+  <rect x="34" y="34" width="17" height="17" rx="4.5" fill="url(#pw-yellow)" />
+</svg>

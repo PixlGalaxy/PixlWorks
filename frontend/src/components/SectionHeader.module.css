@@ -1,0 +1,15 @@
+.header {
+  margin-bottom: clamp(38px, 5vw, 60px);
+}
+
+.center {
+  text-align: center;
+}
+
+.center :global(.section-title) {
+  margin-inline: auto;
+}
+
+.center :global(.section-lead) {
+  margin-inline: auto;
+}

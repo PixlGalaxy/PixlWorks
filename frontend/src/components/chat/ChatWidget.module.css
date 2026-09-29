@@ -1,0 +1,455 @@
+.launcher {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: linear-gradient(140deg, var(--brand), #7c6bff 50%, var(--brand-2));
+  color: var(--on-brand);
+  box-shadow: 0 14px 38px rgba(var(--brand-rgb), 0.45);
+  transition:
+    transform 0.28s var(--ease),
+    box-shadow 0.28s var(--ease);
+}
+
+.launcher:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 20px 48px rgba(var(--brand-rgb), 0.55);
+}
+
+.launcherPing {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+  background: var(--brand-3);
+  animation: ping 2.4s ease-in-out infinite;
+}
+
+/* --- Panel --------------------------------------------------------------- */
+
+.panel {
+  position: fixed;
+  right: 22px;
+  bottom: 90px;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  width: min(calc(100vw - 44px), 396px);
+  height: min(calc(100vh - 140px), 590px);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: rgba(24, 25, 28, 0.94);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  animation: panel-in 0.32s var(--ease);
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Where @starting-style exists, express the entry as a transition from an
+   explicit starting state instead of a keyframe. It composes with whatever
+   the element's resting style is, so the panel cannot end up stuck mid-frame
+   if it mounts while another transition is running. */
+@supports (transition-behavior: allow-discrete) {
+  .panel {
+    animation: none;
+    transition:
+      opacity 0.32s var(--ease),
+      transform 0.32s var(--ease);
+  }
+
+  @starting-style {
+    .panel {
+      opacity: 0;
+      transform: translateY(16px) scale(0.97);
+    }
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 15px 16px 13px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  border: 1px solid rgba(var(--brand-rgb), 0.4);
+  background: rgba(var(--brand-rgb), 0.18);
+  color: var(--brand-tint);
+}
+
+.headerText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.headerText strong {
+  font-size: 0.93rem;
+  font-weight: 600;
+}
+
+.headerText small {
+  font-size: 11.5px;
+  color: var(--text-soft);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.iconButton {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 9px;
+  color: var(--text-soft);
+  transition:
+    color 0.2s var(--ease),
+    background 0.2s var(--ease);
+}
+
+.iconButton:hover:not(:disabled) {
+  color: var(--text);
+  background: var(--surface);
+}
+
+.iconButton:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.statusBar {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-soft);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* --- Messages ------------------------------------------------------------ */
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
+}
+
+.messages::-webkit-scrollbar {
+  width: 7px;
+}
+
+.messages::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.bubble {
+  max-width: 86%;
+  padding: 11px 14px;
+  border-radius: 16px;
+  font-size: 0.89rem;
+  line-height: 1.58;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  animation: bubble-in 0.3s var(--ease);
+}
+
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.assistant {
+  align-self: flex-start;
+  border: 1px solid var(--border-soft);
+  border-bottom-left-radius: 5px;
+  background: rgba(255, 255, 255, 0.055);
+  color: var(--text);
+}
+
+.user {
+  align-self: flex-end;
+  border-bottom-right-radius: 5px;
+  background: linear-gradient(135deg, rgba(var(--brand-rgb), 0.92), rgba(var(--brand-2-rgb), 0.78));
+  color: var(--on-brand);
+}
+
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 0.95em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  border-radius: 1px;
+  background: var(--brand-2);
+  animation: blink 1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Three bouncing dots while the model loads or thinks, before any token. */
+.typing {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 1.1em;
+  vertical-align: middle;
+}
+
+.typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand-2);
+  animation: typing-bounce 1.25s ease-in-out infinite;
+}
+
+.typing span:nth-child(2) {
+  animation-delay: 0.16s;
+}
+
+.typing span:nth-child(3) {
+  animation-delay: 0.32s;
+}
+
+@keyframes typing-bounce {
+  0%,
+  65%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.3;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+/* Motion is the whole signal here, so keep a static visible state instead. */
+@media (prefers-reduced-motion: reduce) {
+  .typing span {
+    opacity: 0.65;
+  }
+}
+
+/* --- Notice and suggestions ---------------------------------------------- */
+
+.notice {
+  padding: 13px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(var(--danger-rgb), 0.28);
+  background: rgba(var(--danger-rgb), 0.09);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.noticeLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 10px;
+  font-weight: 600;
+  color: var(--brand-2);
+}
+
+.noticeLink:hover {
+  text-decoration: underline;
+}
+
+.suggestions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.suggestionsLabel {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.chip {
+  padding: 8px 13px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.035);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  text-align: left;
+  transition:
+    border-color 0.22s var(--ease),
+    background 0.22s var(--ease),
+    color 0.22s var(--ease);
+}
+
+.chip:hover {
+  border-color: rgba(var(--brand-rgb), 0.5);
+  background: rgba(var(--brand-rgb), 0.13);
+  color: var(--text);
+}
+
+/* --- Composer ------------------------------------------------------------ */
+
+.composer {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 14px;
+  border-top: 1px solid var(--border-soft);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.composer input {
+  flex: 1;
+  min-width: 0;
+  padding: 11px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-deep);
+  font-size: 0.87rem;
+  transition: border-color 0.22s var(--ease);
+}
+
+.composer input::placeholder {
+  color: var(--text-soft);
+  /* The offline message is long; keep it on one readable line. */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.composer input:focus {
+  outline: none;
+  border-color: rgba(var(--brand-rgb), 0.65);
+}
+
+.composer input:focus-visible {
+  outline: 2px solid var(--brand-2);
+  outline-offset: 2px;
+}
+
+.composer input:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.send,
+.stop {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  color: var(--on-brand);
+  transition:
+    transform 0.22s var(--ease),
+    opacity 0.22s var(--ease);
+}
+
+.send {
+  background: linear-gradient(135deg, var(--brand), var(--brand-2));
+  box-shadow: 0 6px 18px rgba(var(--brand-rgb), 0.35);
+}
+
+.send:hover:not(:disabled) {
+  transform: scale(1.06);
+}
+
+.send:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.stop {
+  border: 1px solid rgba(var(--danger-rgb), 0.4);
+  background: rgba(var(--danger-rgb), 0.16);
+  color: var(--danger);
+}
+
+.stop:hover {
+  transform: scale(1.06);
+}
+
+.remaining {
+  padding: 0 16px 12px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-soft);
+}
+
+@keyframes ping {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 0.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .panel {
+    right: 12px;
+    left: 12px;
+    bottom: 84px;
+    width: auto;
+    height: min(calc(100vh - 120px), 540px);
+  }
+
+  .launcher {
+    right: 16px;
+    bottom: 16px;
+  }
+}

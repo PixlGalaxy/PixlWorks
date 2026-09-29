@@ -1,0 +1,256 @@
+.hero {
+  position: relative;
+  padding-top: clamp(64px, 9vw, 112px);
+  padding-bottom: clamp(72px, 10vw, 128px);
+}
+
+.grid {
+  display: grid;
+  gap: clamp(46px, 6vw, 72px);
+  align-items: center;
+}
+
+.grid > * {
+  min-width: 0;
+}
+
+.copy {
+  animation: rise-in 0.8s var(--ease) both;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 15px;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--brand-rgb), 0.35);
+  background: rgba(var(--brand-rgb), 0.12);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--brand-tint);
+  margin-bottom: 26px;
+}
+
+/* Solid, NOT gradient text.
+   `background-clip: text` paints the gradient through glyphs that inherit
+   `color: transparent`. Each .word below animates opacity, transform and
+   filter — any one of which promotes it to its own compositing layer, and the
+   parent's text-clipped gradient does not reach into that layer. The result is
+   transparent glyphs over nothing: an invisible headline. */
+.title {
+  font-size: clamp(2.35rem, 6vw, 4.1rem);
+  max-width: 17ch;
+  color: var(--text);
+}
+
+/* Each word rises and unblurs on its own delay. inline-block is required for
+   the transform to apply, and the right margin replaces the space that the
+   split removed. */
+/* No margin for spacing: real space characters sit between the spans in the
+   markup, so the line breaks and justifies exactly as normal prose would. */
+.word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.45em);
+  filter: blur(6px);
+  animation: word-in 0.75s var(--ease) forwards;
+}
+
+@keyframes word-in {
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .word {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    animation: none;
+  }
+}
+
+.subtitle {
+  margin-top: 24px;
+  max-width: 56ch;
+  font-size: clamp(1rem, 1.7vw, 1.16rem);
+  color: var(--text-muted);
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 36px;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 40px;
+}
+
+/* --- Floating outcome cards ---------------------------------------------- */
+
+.visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 420px;
+}
+
+.visualGlow {
+  position: absolute;
+  inset: 12% 6%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(var(--brand-rgb), 0.34), transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.cards {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: min(100%, 390px);
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 17px;
+  box-shadow: var(--shadow-sm);
+  animation: float-in 0.75s var(--ease) both;
+}
+
+/* Stagger the horizontal offsets so the stack reads as floating, not listed. */
+.card:nth-child(even) {
+  margin-left: clamp(0px, 4vw, 42px);
+}
+
+.card:nth-child(3) {
+  margin-left: clamp(0px, 6vw, 62px);
+}
+
+.cardIcon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 11px;
+  border: 1px solid var(--border-soft);
+  background: color-mix(in srgb, var(--accent-color) 16%, transparent);
+  color: var(--accent-color);
+}
+
+.cardText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.cardText strong {
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.cardText small {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-soft);
+}
+
+.cardDot {
+  width: 7px;
+  height: 7px;
+  margin-left: auto;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--accent-color);
+  box-shadow: 0 0 12px var(--accent-color);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes float-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (min-width: 980px) {
+  .grid {
+    grid-template-columns: 1.05fr 0.95fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .hero {
+    padding-top: 40px;
+  }
+
+  .ctas {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .ctas > * {
+    width: 100%;
+  }
+
+  .badges {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 979px) {
+  .visual {
+    min-height: auto;
+  }
+
+  .cards {
+    width: 100%;
+  }
+
+  .card:nth-child(even),
+  .card:nth-child(3) {
+    margin-left: 0;
+  }
+}

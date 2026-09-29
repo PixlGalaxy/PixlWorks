@@ -1,0 +1,585 @@
+/* ==========================================================================
+   PixlWorks design system
+   Dark-first. Tokens here, component specifics in co-located CSS modules.
+
+   Brand colours are declared twice: once as a hex for direct use, once as
+   comma-separated channels so components can build translucent variants with
+   rgba(var(--brand-rgb), 0.3) without hardcoding the colour. Swapping the
+   palette is therefore a one-file change.
+   ========================================================================== */
+
+:root {
+  /* Surfaces */
+  --bg: #06070b;
+  --bg-soft: #0d111a;
+  --surface: rgba(255, 255, 255, 0.055);
+  --surface-strong: rgba(255, 255, 255, 0.09);
+  --surface-deep: rgba(6, 7, 11, 0.55);
+
+  /* Type */
+  --text: #f8fafc;
+  --text-muted: #a6b0c3;
+  --text-soft: #7b8497;
+
+  /* Brand */
+  --brand: #6d5dfc;
+  --brand-rgb: 109, 93, 252;
+  --brand-2: #38bdf8;
+  --brand-2-rgb: 56, 189, 248;
+  --brand-3: #14f195;
+  --brand-3-rgb: 20, 241, 149;
+  --accent: #f96bee;
+  --accent-rgb: 249, 107, 238;
+
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --danger-rgb: 248, 113, 113;
+
+  /* Lightened tints, for icons sitting on their own dark chip. */
+  --brand-tint: #c9c2ff;
+  --brand-2-tint: #7dd3fc;
+
+  /* Text that sits on a filled brand surface. */
+  --on-brand: #ffffff;
+
+  /* Card icon accents: aliases of the palette above, named by hue so the data
+     files read clearly. Each card picks one so a grid reads as distinct items. */
+  --i-indigo: var(--brand);
+  --i-violet: #8b7bff;
+  --i-cyan: var(--brand-2);
+  --i-green: var(--brand-3);
+  --i-pink: var(--accent);
+  --i-amber: var(--warning);
+
+  /* Wordmark: "Pixl" grey, "Works" yellow. */
+  --logo-pixl: #c7d0de;
+  --logo-works: #fde047;
+  --logo-works-2: #f59e0b;
+
+  /* Lines and depth */
+  --border: rgba(255, 255, 255, 0.12);
+  --border-soft: rgba(255, 255, 255, 0.07);
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.25);
+  --glow: 0 0 40px rgba(var(--brand-rgb), 0.35);
+
+  /* Layout */
+  --radius: 18px;
+  --radius-sm: 12px;
+  --radius-lg: 26px;
+  --container: 1200px;
+  /* Shorter on phones, where the bar carries only the logo, the language
+     toggle and the menu trigger. */
+  --nav-h: 56px;
+
+  /* Fonts */
+  --font-sans: 'Geist', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Space Grotesk', 'Geist', 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Anchor targets must clear the sticky navbar. */
+  scroll-padding-top: calc(var(--nav-h) + 24px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand-2);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: rgba(var(--brand-rgb), 0.4);
+  color: #fff;
+}
+
+/* --- Page background mesh ------------------------------------------------ */
+
+.app-shell {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  overflow-x: clip;
+}
+
+.gradient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(110px);
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.gradient-orb--1 {
+  top: -220px;
+  left: -140px;
+  width: 620px;
+  height: 620px;
+  background: radial-gradient(circle, rgba(var(--brand-rgb), 0.7), transparent 68%);
+}
+
+.gradient-orb--2 {
+  top: 480px;
+  right: -220px;
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(circle, rgba(var(--brand-2-rgb), 0.45), transparent 68%);
+}
+
+.gradient-orb--3 {
+  top: 1900px;
+  left: -180px;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.3), transparent 68%);
+}
+
+/* Page texture: a sparse starfield under a layer of film grain.
+   Replaces the 64px square grid, which has become the tell of a generated
+   landing page. Two irregular layers instead of one regular one — nothing here
+   repeats on a rhythm the eye can lock onto. */
+.page-texture {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Interference fringes.
+   Three concentric wave systems with different centres and different periods
+   (74 / 91 / 63px). Where they overlap, the rings beat against each other and
+   produce organic contour curves — closer to a topographic map or a ripple
+   tank than to any repeating tile. Because the three periods share no common
+   multiple, the combined figure never actually repeats on screen.
+
+   Overscanned by 12% so the slow drift below never exposes an edge. */
+.page-texture::before {
+  content: '';
+  position: absolute;
+  inset: -12%;
+  background-image:
+    repeating-radial-gradient(
+      circle at 16% 6%,
+      transparent 0 73px,
+      rgba(255, 255, 255, 0.021) 73px 74px
+    ),
+    repeating-radial-gradient(
+      circle at 86% 24%,
+      transparent 0 90px,
+      rgba(var(--brand-2-rgb), 0.028) 90px 91px
+    ),
+    repeating-radial-gradient(
+      circle at 46% 96%,
+      transparent 0 62px,
+      rgba(var(--brand-rgb), 0.03) 62px 63px
+    );
+  mask-image: radial-gradient(ellipse 120% 85% at 50% 10%, #000 20%, transparent 78%);
+  animation: fringe-drift 90s ease-in-out infinite alternate;
+}
+
+/* Transform only, so the drift stays on the compositor: animating the gradient
+   itself would repaint the whole viewport every frame. */
+@keyframes fringe-drift {
+  to {
+    transform: translate3d(2.5%, -1.8%, 0) scale(1.06);
+  }
+}
+
+/* Film grain. An SVG turbulence tile — the thing that stops a flat dark page
+   from looking like plain CSS. Kept under 4% so it reads as texture, not dirt. */
+.page-texture::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* --- Layout primitives --------------------------------------------------- */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+@media (min-width: 560px) {
+  .container {
+    padding-inline: 22px;
+  }
+}
+
+@media (min-width: 900px) {
+  :root {
+    --nav-h: 68px;
+  }
+}
+
+/* Long unbroken strings (URLs, stack names) are the usual cause of a phone
+   scrolling sideways. */
+body {
+  overflow-wrap: break-word;
+}
+
+.section {
+  padding-block: clamp(72px, 9vw, 120px);
+  position: relative;
+}
+
+/* A hairline between sections. Cheaper visually than alternating background
+   blocks, and it keeps the page reading as one continuous document. */
+.section + .section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% 0;
+  width: min(100% - 44px, var(--container));
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--border-soft) 18%,
+    var(--border-soft) 82%,
+    transparent
+  );
+}
+
+/* Grid and flex children refuse to shrink below their content by default,
+   which is how one wide element (a marquee, a long code string) drags the
+   whole page out of shape. */
+.section > *,
+.container > * {
+  min-width: 0;
+}
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand-2);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 3.6vw, 2.75rem);
+  max-width: 24ch;
+}
+
+.section-lead {
+  margin-top: 18px;
+  max-width: 58ch;
+  color: var(--text-muted);
+  font-size: clamp(0.98rem, 1.5vw, 1.08rem);
+}
+
+/* --- Cards --------------------------------------------------------------- */
+
+.glass-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition:
+    transform 0.35s var(--ease),
+    border-color 0.35s var(--ease),
+    background 0.35s var(--ease);
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(var(--brand-rgb), 0.45);
+  background: var(--surface-strong);
+}
+
+/* --- Buttons ------------------------------------------------------------- */
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 13px 24px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition:
+    transform 0.25s var(--ease),
+    box-shadow 0.25s var(--ease),
+    background 0.25s var(--ease),
+    border-color 0.25s var(--ease);
+}
+
+.cta-button--primary {
+  background: linear-gradient(135deg, var(--brand), #8b7bff 55%, var(--brand-2));
+  color: var(--on-brand);
+  box-shadow: 0 10px 30px rgba(var(--brand-rgb), 0.32);
+}
+
+.cta-button--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 42px rgba(var(--brand-rgb), 0.45);
+}
+
+.cta-button--ghost {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.cta-button--ghost:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.3);
+  background: var(--surface-strong);
+}
+
+.cta-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* --- Tags ---------------------------------------------------------------- */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  background: rgba(255, 255, 255, 0.04);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- Typed custom properties --------------------------------------------- */
+
+/* Registering these makes them interpolatable, which is what lets the conic
+   border below actually animate — a plain custom property would jump. */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* length-percentage, not percentage: useSpotlight writes pixel offsets, and a
+   value outside the registered syntax is discarded back to initial-value. */
+@property --spotlight-x {
+  syntax: '<length-percentage>';
+  initial-value: 50%;
+  inherits: false;
+}
+
+@property --spotlight-y {
+  syntax: '<length-percentage>';
+  initial-value: 50%;
+  inherits: false;
+}
+
+/* --- Cursor spotlight ----------------------------------------------------- */
+
+/* A soft light that follows the pointer across a card. Coordinates are written
+   by useSpotlight; with no pointer (touch, keyboard) it simply never shows. */
+.glass-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+  background: radial-gradient(
+    380px circle at var(--spotlight-x) var(--spotlight-y),
+    rgba(var(--brand-rgb), 0.12),
+    transparent 62%
+  );
+}
+
+@media (hover: hover) {
+  .glass-card:hover::after {
+    opacity: 1;
+  }
+}
+
+/* --- Scroll reveal ------------------------------------------------------- */
+
+/* Baseline: a class toggled by useReveal's IntersectionObserver. */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Where scroll-driven animations exist, hand the work to the compositor: it
+   runs off the main thread and tracks scroll position instead of merely firing
+   once on entry. useReveal detects the same support and stays out of the way. */
+@supports (animation-timeline: view()) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: reveal-in linear both;
+    animation-timeline: view();
+    /* A fixed scroll distance, not a percentage. Percentage ranges are
+       relative to the subject, so an element taller than the viewport can
+       never "fully enter" and risks sitting at the 0% keyframe — invisible —
+       for its whole height. 340px behaves the same for a card and a section. */
+    animation-range: entry 0% entry 340px;
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* --- View transitions ----------------------------------------------------- */
+
+/* Used when switching ES/EN, which rewrites nearly every string on the page.
+   Slightly slower than the default so it reads as a deliberate swap. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.28s;
+  animation-timing-function: var(--ease);
+}
+
+/* --- Motion preferences --------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .glass-card::after {
+    display: none;
+  }
+
+  .page-texture::before {
+    animation: none;
+  }
+}

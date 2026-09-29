@@ -1,0 +1,145 @@
+/* Single column: the copy gets the full measure and the stack gets a full
+   width band underneath, instead of both fighting over a two-column split
+   where the stack ended up as a narrow afterthought. */
+.panel {
+  display: grid;
+  padding: clamp(28px, 4vw, 52px);
+  background: linear-gradient(
+    140deg,
+    rgba(var(--brand-rgb), 0.11),
+    rgba(255, 255, 255, 0.035) 48%
+  );
+}
+
+.panel:hover {
+  transform: none;
+}
+
+.copy {
+  min-width: 0;
+}
+
+.title {
+  font-size: clamp(1.6rem, 3.2vw, 2.35rem);
+  max-width: 20ch;
+  margin-bottom: 22px;
+}
+
+.body {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+  max-width: 62ch;
+}
+
+.note {
+  margin-top: 16px;
+  color: var(--text-soft);
+  font-size: 0.93rem;
+  line-height: 1.65;
+  max-width: 58ch;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition:
+    border-color 0.25s var(--ease),
+    background 0.25s var(--ease),
+    transform 0.25s var(--ease);
+}
+
+.link:hover {
+  transform: translateY(-2px);
+  border-color: rgba(var(--brand-rgb), 0.5);
+  background: rgba(var(--brand-rgb), 0.14);
+}
+
+/* --- Stack band ----------------------------------------------------------- */
+
+.stackBand {
+  margin-top: clamp(32px, 4vw, 46px);
+  padding-top: clamp(26px, 3vw, 34px);
+  border-top: 1px solid var(--border);
+}
+
+.stackLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 22px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand-3);
+}
+
+.stackGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
+  gap: clamp(20px, 2.5vw, 30px);
+}
+
+.group {
+  min-width: 0;
+}
+
+.groupLabel {
+  margin-bottom: 12px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--border-soft);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.groupItems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+/* Larger than the global .tag: this section is a credibility claim, and the
+   old 11.5px chips in a narrow column read as fine print. */
+.chip {
+  padding: 7px 13px;
+  border-radius: 9px;
+  border: 1px solid var(--border-soft);
+  background: rgba(255, 255, 255, 0.045);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  transition:
+    border-color 0.25s var(--ease),
+    background 0.25s var(--ease);
+}
+
+.chip:hover {
+  border-color: rgba(var(--brand-rgb), 0.4);
+  background: rgba(var(--brand-rgb), 0.12);
+}
+
+@media (max-width: 620px) {
+  .panel {
+    padding: 24px 18px;
+  }
+}

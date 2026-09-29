@@ -1,0 +1,45 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mark {
+  flex-shrink: 0;
+  border-radius: 8px;
+  transition: transform 0.3s var(--ease);
+}
+
+.logo:hover .mark {
+  transform: translateY(-1px) rotate(-3deg);
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 1.24rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+/* The wordmark cannot wrap, so it has to give ground on narrow screens. */
+@media (max-width: 400px) {
+  .wordmark {
+    font-size: 1.08rem;
+  }
+
+  .logo {
+    gap: 8px;
+  }
+}
+
+.pixl {
+  color: var(--logo-pixl);
+}
+
+.works {
+  background: linear-gradient(120deg, var(--logo-works), var(--logo-works-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

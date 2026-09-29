@@ -1,0 +1,14 @@
+**/node_modules
+**/dist
+**/__pycache__
+**/*.py[cod]
+**/.venv
+**/.pydeps
+**/.env
+**/.env.*
+!**/.env.example
+**/data
+**/*.log
+.git
+.claude
+README.md

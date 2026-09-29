@@ -1,0 +1,106 @@
+.footer {
+  position: relative;
+  padding-top: clamp(56px, 7vw, 88px);
+  padding-bottom: 34px;
+  border-top: 1px solid var(--border-soft);
+  background: linear-gradient(180deg, transparent, rgba(13, 17, 26, 0.6));
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
+  gap: 38px;
+  padding-bottom: 46px;
+}
+
+/* A fixed minimum here overflows a 320px screen once container padding is
+   taken out; the grid's own minmax already keeps the column readable. */
+.brandColumn {
+  min-width: 0;
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 720px) {
+  .brandColumn {
+    grid-column: auto;
+  }
+}
+
+.tagline {
+  margin-top: 12px;
+  max-width: 34ch;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.email {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  font-size: 0.88rem;
+  color: var(--brand-2);
+  transition: color 0.2s var(--ease);
+}
+
+.email:hover {
+  color: var(--brand-2-tint);
+}
+
+.heading {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-bottom: 16px;
+}
+
+.column ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.column a {
+  font-size: 0.89rem;
+  color: var(--text-muted);
+  transition: color 0.2s var(--ease);
+}
+
+.column a:hover {
+  color: var(--text);
+}
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 26px;
+  border-top: 1px solid var(--border-soft);
+}
+
+.hosted {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.hosted a {
+  color: var(--brand-2);
+  transition: color 0.2s var(--ease);
+}
+
+.hosted a:hover {
+  color: var(--brand-2-tint);
+  text-decoration: underline;
+}
+
+.rights {
+  font-size: 12.5px;
+  color: var(--text-soft);
+}

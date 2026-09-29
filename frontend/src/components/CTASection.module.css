@@ -1,0 +1,198 @@
+.panel {
+  display: grid;
+  gap: clamp(34px, 5vw, 60px);
+  align-items: center;
+}
+
+/* Form controls carry an intrinsic minimum width; without this the column
+   refuses to shrink and pushes the layout wider than the viewport. */
+.panel > * {
+  min-width: 0;
+}
+
+.title {
+  font-size: clamp(1.75rem, 3.6vw, 2.7rem);
+  max-width: 19ch;
+  margin-bottom: 20px;
+}
+
+.body {
+  color: var(--text-muted);
+  font-size: 1.02rem;
+  line-height: 1.7;
+  max-width: 54ch;
+}
+
+.bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin-top: 28px;
+}
+
+.bullets li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.93rem;
+  color: var(--text-muted);
+}
+
+.bullets svg {
+  flex-shrink: 0;
+  color: var(--brand-3);
+}
+
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 26px;
+  font-size: 0.87rem;
+  color: var(--text-soft);
+  transition: color 0.2s var(--ease);
+}
+
+.secondary:hover {
+  color: var(--text);
+}
+
+/* Laid out as a flex row rather than running text. The global reset makes svg
+   a block element, which strips the inline-flex link of a usable baseline and
+   floats the mail icon above the line it sits on. Aligning here instead of
+   relying on inline baselines keeps icon and text centred on each other. */
+.emailAlt {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 6px;
+  margin-top: 14px;
+  font-size: 0.82rem;
+  color: var(--text-soft);
+}
+
+.emailAlt a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--brand-2);
+}
+
+.emailAlt svg {
+  flex-shrink: 0;
+}
+
+.emailAlt a:hover {
+  text-decoration: underline;
+}
+
+/* --- Form ---------------------------------------------------------------- */
+
+.form {
+  padding: clamp(24px, 3vw, 34px);
+}
+
+.form:hover {
+  transform: none;
+}
+
+.formTitle {
+  font-size: 1.08rem;
+  margin-bottom: 22px;
+}
+
+.row {
+  display: grid;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 16px;
+}
+
+.field > span {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface-deep);
+  font-size: 0.93rem;
+  transition:
+    border-color 0.22s var(--ease),
+    background 0.22s var(--ease);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 92px;
+  font-family: inherit;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--text-soft);
+  opacity: 0.75;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: rgba(var(--brand-rgb), 0.65);
+  background: rgba(11, 12, 13, 0.75);
+}
+
+.field input:focus-visible,
+.field textarea:focus-visible {
+  outline: 2px solid var(--brand-2);
+  outline-offset: 2px;
+}
+
+.submit {
+  width: 100%;
+  margin-top: 6px;
+}
+
+.feedback {
+  min-height: 22px;
+  margin-top: 12px;
+  font-size: 0.86rem;
+}
+
+.feedback span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.success {
+  color: var(--brand-3);
+}
+
+.error {
+  color: var(--danger);
+}
+
+@media (min-width: 560px) {
+  .row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 940px) {
+  .panel {
+    grid-template-columns: 1fr 1fr;
+  }
+}

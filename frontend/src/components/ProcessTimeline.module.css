@@ -1,0 +1,113 @@
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 520px) {
+  .step {
+    grid-template-columns: 38px 1fr;
+    gap: 14px;
+  }
+
+  .dot {
+    width: 38px;
+    height: 38px;
+  }
+
+  .body {
+    padding: 18px 16px;
+  }
+
+  /* The step number would collide with a wrapped heading at this width. */
+  .index {
+    display: none;
+  }
+}
+
+.marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dot {
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(var(--brand-rgb), 0.4);
+  background: linear-gradient(140deg, rgba(var(--brand-rgb), 0.28), rgba(var(--brand-2-rgb), 0.14));
+  color: var(--brand-tint);
+  box-shadow: 0 0 24px rgba(var(--brand-rgb), 0.22);
+  
+}
+
+.line {
+  flex: 1;
+  width: 1.5px;
+  margin: 8px 0;
+  border-radius: 2px;
+  background: linear-gradient(180deg, rgba(var(--brand-rgb), 0.5), rgba(var(--brand-rgb), 0.05));
+}
+
+/* The connector draws itself as the step scrolls through, so the timeline
+   reads as a path being travelled rather than static decoration. */
+@supports (animation-timeline: view()) {
+  .line {
+    transform: scaleY(0);
+    transform-origin: top;
+    animation: draw-line linear both;
+    animation-timeline: view();
+    animation-range: entry 25% cover 55%;
+  }
+}
+
+@keyframes draw-line {
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .line {
+    transform: none;
+    animation: none;
+  }
+}
+
+.body {
+  position: relative;
+  padding: 22px 24px;
+  margin-bottom: 20px;
+}
+
+.index {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-soft);
+  opacity: 0.7;
+}
+
+.name {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.desc {
+  font-size: 0.93rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 62ch;
+}
