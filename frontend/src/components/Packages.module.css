@@ -1,97 +1,64 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(265px, 100%), 1fr));
-  gap: 18px;
-  align-items: stretch;
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  gap: 56px 0;
 }
 
-.card {
+.column {
   display: flex;
   flex-direction: column;
-  padding: 28px 24px;
+  align-items: center;
+  text-align: center;
+  padding-inline: clamp(16px, 2vw, 32px);
 }
 
-/* Marked by a badge, not by a brand-tinted surface.
-   The previous treatment used border-color rgba(brand, 0.45) plus a brand glow
-   — byte for byte the same border the shared .glass-card:hover applies — so the
-   card permanently wore the signature of a hovered card and read as a stuck
-   hover state. The border here stays below the hover value so there is always
-   somewhere for the hover to go. */
-.featured {
-  border-color: rgba(var(--brand-rgb), 0.28);
+@media (min-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .column + .column {
+    border-left: 1px solid var(--line);
+  }
 }
 
-.featured:hover {
-  border-color: rgba(var(--brand-rgb), 0.55);
-}
-
+/* Always rendered so every column's icon starts at the same height; it only
+   has text on the recommended one. */
 .badge {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(var(--brand-rgb), 0.4);
-  background: rgba(var(--brand-rgb), 0.16);
-  font-family: var(--font-mono);
-  font-size: 10px;
+  min-height: 1.4em;
+  margin-bottom: 18px;
+  font-size: 0.86rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--brand-tint);
+  color: var(--link);
 }
-
-/* The featured card is marked by its border and surface only.
-   A rotating conic ring lived here and glitched: the mask-composite trick it
-   needed renders with seams and flicker on a 1px inset, and the artefact moved
-   with the animation. A static accent reads cleaner and costs nothing. */
 
 .icon {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  margin-bottom: 20px;
-  border-radius: 13px;
-  border: 1px solid color-mix(in srgb, var(--accent-color) 26%, transparent);
-  background: color-mix(in srgb, var(--accent-color) 12%, transparent);
-  color: var(--accent-color);
+  margin-bottom: 22px;
+  color: var(--text);
 }
 
 .name {
-  font-size: 1.08rem;
-  margin-bottom: 10px;
+  font-size: clamp(1.4rem, 1.9vw, 1.75rem);
+  letter-spacing: -0.03em;
 }
 
 .desc {
-  font-size: 0.89rem;
-  color: var(--text-muted);
-  line-height: 1.58;
+  margin-top: 10px;
+  margin-bottom: 26px;
+  max-width: 30ch;
+  min-height: 3em;
+  color: var(--text-soft);
 }
 
 .features {
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  margin: 22px 0;
-  flex: 1;
+  width: 100%;
+  margin-top: 36px;
+  border-top: 1px solid var(--line);
 }
 
 .features li {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  font-size: 0.86rem;
+  padding-block: 14px;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.95rem;
   color: var(--text-muted);
-}
-
-.features svg {
-  flex-shrink: 0;
-  color: var(--brand-3);
-}
-
-.cta {
-  width: 100%;
-  padding: 11px 18px;
-  font-size: 0.88rem;
 }

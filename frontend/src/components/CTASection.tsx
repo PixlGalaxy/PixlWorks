@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
-import { AlertCircle, Check, CheckCircle2, GitBranch, Mail, Rocket, Send } from 'lucide-react'
+import { AlertCircle, CheckCircle2, ChevronRight, Mail } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useReveal } from '../hooks/useReveal'
 import { API_BASE, CONTACT_LINKS, SECTIONS } from '../data/site'
@@ -83,14 +83,10 @@ export function CTASection() {
   }
 
   return (
-    <section className="section" id={SECTIONS.contact}>
+    <section className="section band-black" id={SECTIONS.contact}>
       <div className="container">
         <div ref={ref} className={`reveal ${styles.panel}`}>
           <div className={styles.copy}>
-            <span className="section-eyebrow">
-              <Rocket size={14} aria-hidden="true" />
-              {t('cta.eyebrow')}
-            </span>
             <h2 className={styles.title}>{t('cta.title')}</h2>
             <p className={styles.body}>{t('cta.body')}</p>
 
@@ -99,10 +95,7 @@ export function CTASection() {
                 here would only split attention away from it. */}
             <ul className={styles.bullets}>
               {tList('cta.bullets').map((item) => (
-                <li key={item}>
-                  <Check size={15} aria-hidden="true" />
-                  {item}
-                </li>
+                <li key={item}>{item}</li>
               ))}
             </ul>
 
@@ -110,14 +103,14 @@ export function CTASection() {
               href={CONTACT_LINKS.github}
               target="_blank"
               rel="noreferrer noopener"
-              className={styles.secondary}
+              className={`text-link ${styles.secondary}`}
             >
-              <GitBranch size={15} aria-hidden="true" />
               {t('cta.github')}
+              <ChevronRight size={18} aria-hidden="true" />
             </a>
           </div>
 
-          <form className={`glass-card ${styles.form}`} onSubmit={onSubmit} noValidate>
+          <form className={styles.form} onSubmit={onSubmit} noValidate>
             <h3 className={styles.formTitle}>{t('cta.form.title')}</h3>
 
             <div className={styles.row}>
@@ -173,10 +166,9 @@ export function CTASection() {
 
             <button
               type="submit"
-              className={`cta-button cta-button--primary ${styles.submit}`}
+              className={`btn btn--primary ${styles.submit}`}
               disabled={state === 'sending'}
             >
-              <Send size={16} aria-hidden="true" />
               {state === 'sending' ? t('cta.form.sending') : t('cta.form.submit')}
             </button>
 

@@ -1,16 +1,16 @@
+/* Apple's footer: parchment, small grey type, and the one place the page is
+   deliberately dense, so the whole site map is visible at a glance. */
 .footer {
   position: relative;
-  padding-top: clamp(56px, 7vw, 88px);
-  padding-bottom: 34px;
-  border-top: 1px solid var(--border-soft);
-  background: linear-gradient(180deg, transparent, rgba(13, 17, 26, 0.6));
+  padding-top: clamp(48px, 5vw, 64px);
+  font-size: 0.8rem;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
-  gap: 38px;
-  padding-bottom: 46px;
+  grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+  gap: 32px;
+  padding-bottom: 32px;
 }
 
 /* A fixed minimum here overflows a 320px screen once container padding is
@@ -18,60 +18,54 @@
 .brandColumn {
   min-width: 0;
   grid-column: 1 / -1;
+  color: var(--text);
 }
 
 @media (min-width: 720px) {
   .brandColumn {
-    grid-column: auto;
+    grid-column: span 2;
   }
 }
 
 .tagline {
-  margin-top: 12px;
-  max-width: 34ch;
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  line-height: 1.6;
+  margin-top: 14px;
+  max-width: 32ch;
+  color: var(--text-soft);
 }
 
 .email {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 18px;
-  font-size: 0.88rem;
-  color: var(--brand-2);
-  transition: color 0.2s var(--ease);
+  gap: 7px;
+  margin-top: 14px;
+  color: var(--link);
 }
 
 .email:hover {
-  color: var(--brand-2-tint);
+  text-decoration: underline;
 }
 
 .heading {
-  font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-soft);
-  margin-bottom: 16px;
+  color: var(--text);
+  margin-bottom: 10px;
 }
 
+/* Apple's relaxed 2.4 leading is what keeps dense link columns scannable. */
 .column ul {
   display: flex;
   flex-direction: column;
-  gap: 10px;
 }
 
 .column a {
-  font-size: 0.89rem;
-  color: var(--text-muted);
-  transition: color 0.2s var(--ease);
+  line-height: 2.4;
+  color: var(--text-soft);
 }
 
 .column a:hover {
   color: var(--text);
+  text-decoration: underline;
 }
 
 .bottom {
@@ -79,28 +73,21 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding-top: 26px;
-  border-top: 1px solid var(--border-soft);
+  gap: 10px;
+  padding-block: 16px 24px;
+  border-top: 1px solid var(--line);
 }
 
-.hosted {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--text-muted);
+.hosted,
+.rights {
+  font-size: 0.75rem;
+  color: var(--text-soft);
 }
 
 .hosted a {
-  color: var(--brand-2);
-  transition: color 0.2s var(--ease);
+  color: var(--text-muted);
 }
 
 .hosted a:hover {
-  color: var(--brand-2-tint);
   text-decoration: underline;
-}
-
-.rights {
-  font-size: 12.5px;
-  color: var(--text-soft);
 }

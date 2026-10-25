@@ -1,66 +1,50 @@
-import { Check, Package as PackageIcon } from 'lucide-react'
-import type { CSSProperties } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useReveal } from '../hooks/useReveal'
-import { useSpotlight } from '../hooks/useSpotlight'
-import { mergeRefs } from '../hooks/mergeRefs'
 import { packages } from '../data/packages'
 import { SECTIONS } from '../data/site'
 import { CONTACT_ANCHOR, requestQuote } from '../lib/leadIntent'
 import { SectionHeader } from './SectionHeader'
 import styles from './Packages.module.css'
 
-
+/**
+ * Laid out like Apple's "compare models" page: centred columns divided by
+ * hairlines, the action high up, then a list of what each one includes. The
+ * recommended package is marked by a word and the only filled button.
+ */
 export function Packages() {
   const { t, tList } = useLanguage()
   const gridRef = useReveal<HTMLUListElement>(0.05)
-  const spotlightRef = useSpotlight<HTMLUListElement>()
 
   return (
-    <section className="section" id={SECTIONS.pricing}>
+    <section className="section band-white" id={SECTIONS.pricing}>
       <div className="container">
-        <SectionHeader
-          eyebrow={t('packages.eyebrow')}
-          title={t('packages.title')}
-          lead={t('packages.lead')}
-          icon={PackageIcon}
-        />
+        <SectionHeader title={t('packages.title')} lead={t('packages.lead')} />
 
-        <ul ref={mergeRefs(gridRef, spotlightRef)} className={`reveal ${styles.grid}`}>
-          {packages.map(({ id, icon: Icon, featured, accent }) => {
+        <ul ref={gridRef} className={`reveal ${styles.grid}`}>
+          {packages.map(({ id, icon: Icon, featured }) => {
             const name = t(`packages.items.${id}.name`)
             return (
-              <li
-                key={id}
-                className={`glass-card ${styles.card} ${featured ? styles.featured : ''}`}
-                style={{ '--accent-color': accent } as CSSProperties}
-              >
-                {featured ? <span className={styles.badge}>{t('packages.badge')}</span> : null}
-
-                <span className={styles.icon}>
-                  <Icon size={20} />
-                </span>
+              <li key={id} className={styles.column}>
+                <span className={styles.badge}>{featured ? t('packages.badge') : ' '}</span>
+                <Icon size={40} strokeWidth={1.5} className={styles.icon} aria-hidden="true" />
                 <h3 className={styles.name}>{name}</h3>
                 <p className={styles.desc}>{t(`packages.items.${id}.desc`)}</p>
-
-                <ul className={styles.features}>
-                  {tList(`packages.items.${id}.features`).map((feature) => (
-                    <li key={feature}>
-                      <Check size={14} aria-hidden="true" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
 
                 {/* Scrolls to the form and prefills it, so a quote request is
                     captured as a lead rather than lost in an inbox. */}
                 <a
                   href={CONTACT_ANCHOR}
                   onClick={() => requestQuote(name)}
-                  className={`cta-button cta-button--ghost ${styles.cta}`}
+                  className={`btn ${featured ? 'btn--primary' : 'btn--ghost'}`}
                 >
                   {t('packages.cta')}
                 </a>
+
+                <ul className={styles.features}>
+                  {tList(`packages.items.${id}.features`).map((feature) => (
+                    <li key={feature}>{feature}</li>
+                  ))}
+                </ul>
               </li>
             )
           })}

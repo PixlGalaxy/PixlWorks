@@ -69,6 +69,8 @@ export const translations = {
         'Si tu negocio todavía depende de hojas de cálculo, mensajes perdidos o procesos manuales, estás perdiendo tiempo y clientes.',
       lead: 'Estos son los cuellos de botella que aparecen una y otra vez, y lo que ponemos en su lugar.',
       solutionLabel: 'Lo que hacemos',
+      prev: 'Anterior',
+      next: 'Siguiente',
       items: {
         messages: {
           problem: 'Clientes escriben por WhatsApp o Instagram y nadie responde a tiempo.',
@@ -106,6 +108,7 @@ export const translations = {
       eyebrow: 'Soluciones',
       title: 'Soluciones que se adaptan a tu operación.',
       lead: 'No vendemos paquetes cerrados. Empezamos por donde tu negocio pierde más tiempo o más dinero.',
+      cta: 'Cotizar',
       items: {
         websites: {
           title: 'Páginas web que convierten',
@@ -251,7 +254,7 @@ export const translations = {
         errorRate: 'Ya recibimos tu solicitud. Escríbenos por correo si es urgente.',
         errorGeneric: 'No se pudo enviar. Escríbenos directamente por correo.',
         required: 'Nombre y correo son obligatorios.',
-        prefill: 'Me interesa el paquete {package}. Cuéntame cómo funcionaría para mi negocio.',
+        prefill: 'Me interesa {package}. Cuéntame cómo funcionaría para mi negocio.',
       },
     },
     footer: {
@@ -372,6 +375,8 @@ export const translations = {
         'If your business still runs on spreadsheets, lost messages and manual steps, you are losing time and customers.',
       lead: 'These are the bottlenecks that show up again and again, and what we put in their place.',
       solutionLabel: 'What we do',
+      prev: 'Previous',
+      next: 'Next',
       items: {
         messages: {
           problem: 'Customers write on WhatsApp or Instagram and nobody replies in time.',
@@ -409,6 +414,7 @@ export const translations = {
       eyebrow: 'Solutions',
       title: 'Solutions that fit how you actually operate.',
       lead: 'No fixed bundles. We start wherever your business is losing the most time or money.',
+      cta: 'Get a quote',
       items: {
         websites: {
           title: 'Websites that convert',
@@ -554,7 +560,7 @@ export const translations = {
         errorRate: 'We already received your request. Email us directly if it is urgent.',
         errorGeneric: 'Could not send. Please email us directly.',
         required: 'Name and email are required.',
-        prefill: "I'm interested in the {package} package. Tell me how it would work for my business.",
+        prefill: "I'm interested in {package}. Tell me how it would work for my business.",
       },
     },
     footer: {

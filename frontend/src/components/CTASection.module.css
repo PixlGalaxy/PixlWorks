@@ -1,7 +1,8 @@
+/* The pitch on the left, the form on the right, both straight on the black
+   band: no panel around either. */
 .panel {
   display: grid;
-  gap: clamp(34px, 5vw, 60px);
-  align-items: center;
+  gap: clamp(48px, 6vw, 96px);
 }
 
 /* Form controls carry an intrinsic minimum width; without this the column
@@ -10,65 +11,53 @@
   min-width: 0;
 }
 
+.copy {
+  display: flex;
+  flex-direction: column;
+}
+
 .title {
-  font-size: clamp(1.75rem, 3.6vw, 2.7rem);
-  max-width: 19ch;
-  margin-bottom: 20px;
+  font-size: clamp(2.4rem, 5.6vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+  max-width: 14ch;
+  margin-bottom: 26px;
 }
 
 .body {
-  color: var(--text-muted);
-  font-size: 1.02rem;
-  line-height: 1.7;
-  max-width: 54ch;
+  max-width: 44ch;
+  font-size: clamp(1.1rem, 1.6vw, 1.36rem);
+  line-height: 1.35;
+  color: var(--text-soft);
 }
 
+/* Reassurances as a short list divided by hairlines. */
 .bullets {
-  display: flex;
-  flex-direction: column;
-  gap: 11px;
-  margin-top: 28px;
+  margin-top: 36px;
+  max-width: 420px;
+  border-top: 1px solid var(--line);
 }
 
 .bullets li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.93rem;
-  color: var(--text-muted);
-}
-
-.bullets svg {
-  flex-shrink: 0;
-  color: var(--brand-3);
+  padding-block: 14px;
+  border-bottom: 1px solid var(--line);
 }
 
 .secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 26px;
-  font-size: 0.87rem;
-  color: var(--text-soft);
-  transition: color 0.2s var(--ease);
-}
-
-.secondary:hover {
-  color: var(--text);
+  margin-top: 28px;
 }
 
 /* Laid out as a flex row rather than running text. The global reset makes svg
    a block element, which strips the inline-flex link of a usable baseline and
-   floats the mail icon above the line it sits on. Aligning here instead of
-   relying on inline baselines keeps icon and text centred on each other. */
+   floats the mail icon above the line it sits on. */
 .emailAlt {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 4px 6px;
-  margin-top: 14px;
-  font-size: 0.82rem;
+  margin-top: 16px;
+  font-size: 0.88rem;
   color: var(--text-soft);
 }
 
@@ -76,7 +65,7 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  color: var(--brand-2);
+  color: var(--link);
 }
 
 .emailAlt svg {
@@ -89,86 +78,72 @@
 
 /* --- Form ---------------------------------------------------------------- */
 
-.form {
-  padding: clamp(24px, 3vw, 34px);
-}
-
-.form:hover {
-  transform: none;
-}
-
 .formTitle {
-  font-size: 1.08rem;
-  margin-bottom: 22px;
+  font-size: 1.5rem;
+  letter-spacing: -0.025em;
+  margin-bottom: 24px;
 }
 
 .row {
   display: grid;
-  gap: 16px;
+  gap: 14px;
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 8px;
   margin-bottom: 16px;
 }
 
 .field > span {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-soft);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
 }
 
 .field input,
 .field textarea {
   width: 100%;
-  padding: 12px 14px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  background: var(--surface-deep);
-  font-size: 0.93rem;
+  padding: 14px 16px;
+  border-radius: 11px;
+  border: 1px solid #424245;
+  background: var(--surface);
+  font-size: 1.06rem;
   transition:
-    border-color 0.22s var(--ease),
-    background 0.22s var(--ease);
+    border-color 0.2s var(--ease),
+    box-shadow 0.2s var(--ease);
 }
 
 .field textarea {
   resize: vertical;
-  min-height: 92px;
+  min-height: 120px;
   font-family: inherit;
 }
 
 .field input::placeholder,
 .field textarea::placeholder {
   color: var(--text-soft);
-  opacity: 0.75;
 }
 
 .field input:focus,
 .field textarea:focus {
   outline: none;
-  border-color: rgba(var(--brand-rgb), 0.65);
-  background: rgba(11, 12, 13, 0.75);
-}
-
-.field input:focus-visible,
-.field textarea:focus-visible {
-  outline: 2px solid var(--brand-2);
-  outline-offset: 2px;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255, 90, 31, 0.3);
 }
 
 .submit {
   width: 100%;
-  margin-top: 6px;
+  padding-block: 15px;
+  margin-top: 8px;
+  font-size: 1.06rem;
 }
 
 .feedback {
   min-height: 22px;
   margin-top: 12px;
-  font-size: 0.86rem;
+  font-size: 0.92rem;
 }
 
 .feedback span {
@@ -178,7 +153,7 @@
 }
 
 .success {
-  color: var(--brand-3);
+  color: var(--success);
 }
 
 .error {
@@ -191,8 +166,8 @@
   }
 }
 
-@media (min-width: 940px) {
+@media (min-width: 1000px) {
   .panel {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
 }

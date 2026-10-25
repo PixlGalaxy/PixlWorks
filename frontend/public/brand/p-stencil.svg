@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="PixlWorks">
+  <!-- Variant B, "Stencil". Stem and bowl as two separate blocks with a 4-unit
+       cut between them; the bowl's outer corner is chamfered. -->
+  <rect x="6" y="4" width="16" height="56" fill="#f5f5f7" />
+  <path fill="#f5f5f7" fill-rule="evenodd" d="M26 4H46L58 16V42H26Z M38 16V30H46V16Z" />
+  <rect x="44" y="48" width="12" height="12" fill="#ff5a1f" />
+</svg>

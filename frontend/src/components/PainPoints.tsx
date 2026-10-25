@@ -1,47 +1,51 @@
-import { AlertCircle, ArrowDown } from 'lucide-react'
-import type { CSSProperties } from 'react'
+import { useRef } from 'react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
-import { useReveal } from '../hooks/useReveal'
-import { useSpotlight } from '../hooks/useSpotlight'
-import { mergeRefs } from '../hooks/mergeRefs'
 import { painPoints } from '../data/painPoints'
 import { SectionHeader } from './SectionHeader'
 import styles from './PainPoints.module.css'
 
+/**
+ * A horizontal gallery of tall cards, the way Apple runs "Get to know
+ * iPhone": the problem as a small caption, our answer as the headline. It
+ * scrolls natively (touch, trackpad, shift-wheel); the two buttons just step
+ * it one card at a time for mouse and keyboard users.
+ */
 export function PainPoints() {
   const { t } = useLanguage()
-  const gridRef = useReveal<HTMLUListElement>(0.05)
-  const spotlightRef = useSpotlight<HTMLUListElement>()
+  const trackRef = useRef<HTMLUListElement>(null)
+
+  function step(direction: 1 | -1) {
+    const track = trackRef.current
+    if (!track) return
+    const card = track.firstElementChild as HTMLElement | null
+    const gap = parseFloat(getComputedStyle(track).columnGap) || 0
+    const distance = card ? card.offsetWidth + gap : track.clientWidth * 0.8
+    track.scrollBy({ left: direction * distance, behavior: 'smooth' })
+  }
 
   return (
-    <section className="section" id="pains">
+    <section className="section band-white" id="pains">
       <div className="container">
-        <SectionHeader
-          eyebrow={t('pains.eyebrow')}
-          title={t('pains.title')}
-          lead={t('pains.lead')}
-          icon={AlertCircle}
-        />
+        <SectionHeader title={t('pains.title')} lead={t('pains.lead')} />
+      </div>
 
-        <ul ref={mergeRefs(gridRef, spotlightRef)} className={`reveal ${styles.grid}`}>
-          {painPoints.map(({ id, icon: Icon, accent }) => (
-            <li
-              key={id}
-              className={`glass-card ${styles.card}`}
-              style={{ '--accent-color': accent } as CSSProperties}
-            >
-              <span className={styles.icon}>
-                <Icon size={19} />
-              </span>
-              <p className={styles.problem}>{t(`pains.items.${id}.problem`)}</p>
-              <div className={styles.divider}>
-                <ArrowDown size={13} aria-hidden="true" />
-                <span>{t('pains.solutionLabel')}</span>
-              </div>
-              <p className={styles.solution}>{t(`pains.items.${id}.solution`)}</p>
-            </li>
-          ))}
-        </ul>
+      <ul ref={trackRef} className={styles.track} aria-label={t('pains.eyebrow')}>
+        {painPoints.map(({ id }) => (
+          <li key={id} className={styles.card}>
+            <p className={styles.problem}>{t(`pains.items.${id}.problem`)}</p>
+            <p className={styles.solution}>{t(`pains.items.${id}.solution`)}</p>
+          </li>
+        ))}
+      </ul>
+
+      <div className={`container ${styles.controls}`}>
+        <button type="button" className={styles.arrow} onClick={() => step(-1)} aria-label={t('pains.prev')}>
+          <ChevronLeft size={20} />
+        </button>
+        <button type="button" className={styles.arrow} onClick={() => step(1)} aria-label={t('pains.next')}>
+          <ChevronRight size={20} />
+        </button>
       </div>
     </section>
   )

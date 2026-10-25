@@ -1,50 +1,73 @@
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(290px, 100%), 1fr));
-  gap: 18px;
+/* Runs edge to edge; the first card lines up with the page gutter and the
+   last one can scroll fully clear of the right edge. */
+.track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-inline: var(--gutter);
+  scroll-padding-inline: var(--gutter);
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  padding: 26px 24px;
-}
-
-.icon {
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  margin-bottom: 18px;
-  border-radius: 12px;
-  border: 1px solid color-mix(in srgb, var(--accent-color) 26%, transparent);
-  background: color-mix(in srgb, var(--accent-color) 12%, transparent);
-  color: var(--accent-color);
+  justify-content: space-between;
+  gap: 40px;
+  flex: 0 0 clamp(280px, 30vw, 420px);
+  min-height: clamp(380px, 34vw, 500px);
+  padding: clamp(28px, 2.6vw, 40px);
+  border-radius: var(--radius);
+  background: var(--surface);
+  scroll-snap-align: start;
 }
 
 .problem {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--text);
-  line-height: 1.5;
-}
-
-.divider {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin: 18px 0 12px;
-  padding-top: 16px;
-  border-top: 1px dashed var(--border);
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--brand-3);
+  font-size: 1.06rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  max-width: 30ch;
 }
 
 .solution {
-  font-size: 0.93rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+}
+
+.controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+/* Apple's circular control chip. */
+.arrow {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--surface-2);
   color: var(--text-muted);
-  line-height: 1.6;
+  transition:
+    background 0.2s var(--ease),
+    transform 0.15s var(--ease);
+}
+
+.arrow:hover {
+  background: #dcdce1;
+}
+
+.arrow:active {
+  transform: scale(0.95);
 }

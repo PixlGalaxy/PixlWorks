@@ -1,52 +1,28 @@
 .wrap {
-  position: relative;
-  padding-block: clamp(26px, 3vw, 38px);
-  border-block: 1px solid var(--border-soft);
-  background: rgba(255, 255, 255, 0.015);
+  padding-bottom: clamp(56px, 6vw, 88px);
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
-  gap: clamp(20px, 3vw, 34px);
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  gap: 28px clamp(24px, 3vw, 48px);
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
 }
 
 .item {
   display: flex;
-  align-items: flex-start;
-  gap: 11px;
-  min-width: 0;
-}
-
-.icon {
-  flex-shrink: 0;
-  margin-top: 3px;
-  color: var(--brand-2);
-}
-
-.text {
-  display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
   min-width: 0;
 }
 
-.text strong {
-  font-size: 0.92rem;
+.item strong {
+  font-size: 1.06rem;
   font-weight: 600;
-  line-height: 1.35;
 }
 
-.text span {
-  font-size: 0.83rem;
-  line-height: 1.5;
+.item span {
+  font-size: 0.94rem;
   color: var(--text-soft);
-}
-
-/* Vertical rules between columns, only once all four sit on one row. */
-@media (min-width: 900px) {
-  .item + .item {
-    padding-left: clamp(18px, 2.4vw, 30px);
-    border-left: 1px solid var(--border-soft);
-  }
 }

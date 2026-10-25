@@ -7,7 +7,6 @@ export interface Project {
   icon: LucideIcon
   url: string
   stack: string[]
-  accent: string
 }
 
 /** Only the builds that best demonstrate the services above. */
@@ -18,7 +17,6 @@ export const projects: Project[] = [
     icon: Vote,
     url: 'https://github.com/PixlGalaxy/Pixls_ONPE_Fetcher',
     stack: ['React', 'TypeScript', 'FastAPI', 'Docker', 'Nginx', 'AI'],
-    accent: 'var(--i-cyan)',
   },
   {
     id: 'eagledocs',
@@ -26,7 +24,6 @@ export const projects: Project[] = [
     icon: BookOpen,
     url: 'https://github.com/PixlGalaxy/EagleDocs',
     stack: ['React', 'Vite', 'Backend', 'Database', 'AI engine'],
-    accent: 'var(--i-green)',
   },
   {
     id: 'itzgalaxy',
@@ -34,6 +31,5 @@ export const projects: Project[] = [
     icon: Orbit,
     url: 'https://github.com/PixlGalaxy/ItzGalaxy',
     stack: ['React', 'Vite', 'Self-hosted'],
-    accent: 'var(--i-violet)',
   },
 ]

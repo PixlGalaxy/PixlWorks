@@ -23,14 +23,14 @@ interface Appearance {
 
 const APPEARANCE: Record<ChatStatus, Appearance> = {
   idle: { icon: Zap, color: 'var(--text-soft)' },
-  ready: { icon: Zap, color: 'var(--brand-3)' },
+  ready: { icon: Zap, color: 'var(--success)' },
   not_loaded: { icon: PowerOff, color: 'var(--text-soft)' },
-  loading: { icon: Loader2, color: 'var(--warning)', motion: 'spin' },
-  thinking: { icon: Brain, color: 'var(--brand-2)', motion: 'pulse' },
-  streaming: { icon: Sparkles, color: 'var(--brand)', motion: 'pulse' },
+  loading: { icon: Loader2, color: 'var(--text-muted)', motion: 'spin' },
+  thinking: { icon: Brain, color: 'var(--text-muted)', motion: 'pulse' },
+  streaming: { icon: Sparkles, color: 'var(--accent)', motion: 'pulse' },
   offline: { icon: CloudOff, color: 'var(--danger)' },
-  busy: { icon: Hourglass, color: 'var(--warning)' },
-  rate_limited: { icon: Hourglass, color: 'var(--warning)' },
+  busy: { icon: Hourglass, color: 'var(--text-muted)' },
+  rate_limited: { icon: Hourglass, color: 'var(--text-muted)' },
   model_missing: { icon: TriangleAlert, color: 'var(--danger)' },
   error: { icon: TriangleAlert, color: 'var(--danger)' },
 }

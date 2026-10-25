@@ -1,59 +1,53 @@
+/* The header gets the usual top padding; the tiles below run to the next
+   section with no bottom padding, so the grid's last row is the divider. */
+.section {
+  padding-top: clamp(80px, 10vw, 140px);
+}
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-  gap: 18px;
 }
 
-.card {
-  position: relative;
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Rectangular, edge to edge, centred stack: Apple's product tile. */
+.tile {
   display: flex;
   flex-direction: column;
-  padding: 30px 26px;
-  overflow: hidden;
-}
-
-/* A thin accent wash that only appears on hover, so the grid stays calm. */
-.card::before {
-  content: '';
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
-  opacity: 0;
-  transition: opacity 0.35s var(--ease);
-}
-
-.card:hover::before {
-  opacity: 0.8;
+  align-items: center;
+  text-align: center;
+  min-height: clamp(440px, 42vw, 620px);
+  padding: clamp(56px, 6vw, 88px) var(--gutter);
 }
 
 .icon {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  margin-bottom: 22px;
-  border-radius: 14px;
-  border: 1px solid color-mix(in srgb, var(--accent-color) 30%, transparent);
-  background: color-mix(in srgb, var(--accent-color) 13%, transparent);
-  color: var(--accent-color);
+  margin-bottom: 26px;
+  color: var(--text);
 }
 
 .title {
-  font-size: 1.18rem;
-  margin-bottom: 12px;
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  letter-spacing: -0.035em;
+  max-width: 16ch;
 }
 
 .desc {
-  font-size: 0.94rem;
-  color: var(--text-muted);
-  line-height: 1.62;
-  flex: 1;
+  margin-top: 14px;
+  max-width: 38ch;
+  font-size: clamp(1.06rem, 1.4vw, 1.3rem);
+  line-height: 1.35;
+  color: var(--text-soft);
+  margin-bottom: 26px;
 }
 
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-  margin-top: 22px;
+/* The stack as one grey line pinned to the foot of the tile. */
+.stack {
+  margin-top: auto;
+  padding-top: 40px;
+  font-size: 0.82rem;
+  color: var(--text-soft);
 }

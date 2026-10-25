@@ -1,78 +1,45 @@
-import { ArrowUpRight, Code2, GitBranch } from 'lucide-react'
-import type { CSSProperties } from 'react'
+import { ChevronRight } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useReveal } from '../hooks/useReveal'
-import { useSpotlight } from '../hooks/useSpotlight'
-import { mergeRefs } from '../hooks/mergeRefs'
 import { projects } from '../data/projects'
 import { CONTACT_LINKS, SECTIONS } from '../data/site'
 import { SectionHeader } from './SectionHeader'
 import styles from './Projects.module.css'
 
+/** Three cards on black, each closing on a text link to the repository. */
 export function Projects() {
   const { t } = useLanguage()
   const gridRef = useReveal<HTMLUListElement>(0.05)
-  const spotlightRef = useSpotlight<HTMLUListElement>()
 
   return (
-    <section className="section" id={SECTIONS.work}>
+    <section className="section band-black" id={SECTIONS.work}>
       <div className="container">
-        <SectionHeader
-          eyebrow={t('projects.eyebrow')}
-          title={t('projects.title')}
-          lead={t('projects.lead')}
-          icon={Code2}
-        />
+        <SectionHeader title={t('projects.title')} lead={t('projects.lead')} />
 
-        <ul ref={mergeRefs(gridRef, spotlightRef)} className={`reveal ${styles.grid}`}>
-          {projects.map(({ id, name, icon: Icon, url, stack, accent }) => (
-            <li
-              key={id}
-              className={`glass-card ${styles.card}`}
-              style={{ '--accent-color': accent } as CSSProperties}
-            >
-              <div className={styles.head}>
-                <span className={styles.icon}>
-                  <Icon size={21} />
-                </span>
-                <GitBranch size={17} className={styles.github} aria-hidden="true" />
-              </div>
-
+        <ul ref={gridRef} className={`reveal ${styles.grid}`}>
+          {projects.map(({ id, name, icon: Icon, url, stack }) => (
+            <li key={id} className={styles.card}>
+              <Icon size={32} strokeWidth={1.5} className={styles.icon} aria-hidden="true" />
               <h3 className={styles.name}>{name}</h3>
               <p className={styles.desc}>{t(`projects.items.${id}.desc`)}</p>
-
-              <ul className={styles.stack}>
-                {stack.map((tech) => (
-                  <li key={tech} className="tag">
-                    {tech}
-                  </li>
-                ))}
-              </ul>
-
-              <a
-                href={url}
-                target="_blank"
-                rel="noreferrer noopener"
-                className={styles.view}
-              >
+              <p className={styles.stack}>{stack.join(' · ')}</p>
+              <a href={url} target="_blank" rel="noreferrer noopener" className={`text-link ${styles.view}`}>
                 {t('projects.view')}
-                <ArrowUpRight size={15} aria-hidden="true" />
+                <ChevronRight size={18} aria-hidden="true" />
               </a>
             </li>
           ))}
         </ul>
 
-        <div className={styles.more}>
-          <a
-            href={CONTACT_LINKS.github}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="cta-button cta-button--ghost"
-          >
-            <GitBranch size={16} aria-hidden="true" />
-            github.com/PixlGalaxy
-          </a>
-        </div>
+        <a
+          href={CONTACT_LINKS.github}
+          target="_blank"
+          rel="noreferrer noopener"
+          className={`text-link ${styles.more}`}
+        >
+          github.com/PixlGalaxy
+          <ChevronRight size={18} aria-hidden="true" />
+        </a>
       </div>
     </section>
   )

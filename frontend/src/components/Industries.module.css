@@ -1,35 +1,24 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(270px, 100%), 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: clamp(36px, 4vw, 56px) clamp(28px, 3vw, 56px);
 }
 
-.card {
-  display: flex;
-  align-items: flex-start;
-  gap: 15px;
-  padding: 22px 21px;
+.item {
+  min-width: 0;
 }
 
 .icon {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  flex-shrink: 0;
-  border-radius: 11px;
-  border: 1px solid color-mix(in srgb, var(--accent-color) 26%, transparent);
-  background: color-mix(in srgb, var(--accent-color) 12%, transparent);
-  color: var(--accent-color);
+  margin-bottom: 16px;
+  color: var(--text);
 }
 
 .name {
-  font-size: 1.02rem;
-  margin-bottom: 5px;
+  font-size: 1.3rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
 }
 
 .desc {
-  font-size: 0.88rem;
-  color: var(--text-muted);
-  line-height: 1.55;
+  color: var(--text-soft);
 }

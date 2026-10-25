@@ -3,7 +3,7 @@ import { SECTIONS } from '../data/site'
 export const QUOTE_EVENT = 'pixlworks:quote'
 
 /**
- * Announce that the visitor asked about a specific package.
+ * Announce that the visitor asked about a specific package or service.
  *
  * The contact form listens and prefills itself, so a quote request lands as a
  * captured lead instead of an untracked mailto. A DOM event rather than shared

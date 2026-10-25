@@ -10,10 +10,10 @@ export function Footer() {
   const { t } = useLanguage()
 
   return (
-    <footer className={styles.footer}>
+    <footer className={`band-parchment ${styles.footer}`}>
       <div className={`container ${styles.grid}`}>
         <div className={styles.brandColumn}>
-          <Logo size={30} />
+          <Logo size={22} />
           <p className={styles.tagline}>{t('footer.tagline')}</p>
           <a href={CONTACT_LINKS.email} className={styles.email}>
             <Mail size={15} aria-hidden="true" />

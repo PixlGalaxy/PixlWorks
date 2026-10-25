@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="PixlWorks">
+  <!-- Variant C, "Slash". A solid square P sliced by one diagonal, the cut
+       filled in signal orange. Reads as forward motion. -->
+  <path fill="#f5f5f7" fill-rule="evenodd" d="M6 4H58V42H26V60H6Z M26 16V30H40V16Z" />
+  <path fill="#ff5a1f" d="M6 60L26 40V48L14 60Z" />
+</svg>

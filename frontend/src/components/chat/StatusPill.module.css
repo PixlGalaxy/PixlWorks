@@ -1,19 +1,16 @@
 .pill {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
   padding: 4px 11px;
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--pill-color) 35%, transparent);
   background: color-mix(in srgb, var(--pill-color) 12%, transparent);
   color: var(--pill-color);
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.02em;
+  font-size: 0.75rem;
+  font-weight: 500;
   white-space: nowrap;
   transition:
     color 0.3s var(--ease),
-    border-color 0.3s var(--ease),
     background 0.3s var(--ease);
 }
 

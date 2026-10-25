@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ArrowDown, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useActiveSection } from '../hooks/useActiveSection'
 import { SECTIONS } from '../data/site'
@@ -59,8 +59,7 @@ export function Navbar() {
       <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
         <nav className={styles.nav} aria-label="Main">
           <a href="#top" className={styles.brand} aria-label="PixlWorks">
-            <Logo size={30} />
-            <span className={styles.byline}>{t('nav.byline')}</span>
+            <Logo size={20} />
           </a>
 
           <ul className={styles.links}>
@@ -69,8 +68,8 @@ export function Navbar() {
                 <a
                   href={`#${link.id}`}
                   className={`${styles.link} ${active === link.id ? styles.linkActive : ''}`}
-                  // Communicates the highlight to assistive tech, which cannot
-                  // see the pill behind the label.
+                  // Communicates the highlight to assistive tech, which only
+                  // sees a change of brightness.
                   aria-current={active === link.id ? 'true' : undefined}
                 >
                   {t(link.key)}
@@ -81,9 +80,8 @@ export function Navbar() {
 
           <div className={styles.actions}>
             <LanguageToggle />
-            <a href={CONTACT_ANCHOR} className={`cta-button cta-button--primary ${styles.cta}`}>
+            <a href={CONTACT_ANCHOR} className={`btn btn--primary ${styles.cta}`}>
               {t('nav.cta')}
-              <ArrowDown size={15} className={styles.ctaIcon} aria-hidden="true" />
             </a>
             <button
               type="button"
@@ -124,11 +122,10 @@ export function Navbar() {
           </ul>
           <a
             href={CONTACT_ANCHOR}
-            className="cta-button cta-button--primary"
+            className="btn btn--primary"
             onClick={() => setMenuOpen(false)}
           >
             {t('nav.cta')}
-            <ArrowDown size={16} aria-hidden="true" />
           </a>
         </div>
       ) : null}
