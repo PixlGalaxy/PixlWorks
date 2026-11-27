@@ -1,0 +1,46 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    open-pull-requests-limit: 15
+    schedule:
+      interval: "daily"
+    # Wait before proposing a freshly published version: hijacked releases
+    # (Axios, Shai-Hulud, ChainDrop...) are usually caught and pulled within days.
+    # Security updates are not delayed by this.
+    cooldown:
+      default-days: 7
+    groups:
+      frontend-deps:
+        patterns:
+          - "*"
+
+  - package-ecosystem: "pip"
+    directory: "/backend"
+    open-pull-requests-limit: 15
+    schedule:
+      interval: "daily"
+    # Wait before proposing a freshly published version: hijacked releases
+    # (Axios, Shai-Hulud, ChainDrop...) are usually caught and pulled within days.
+    # Security updates are not delayed by this.
+    cooldown:
+      default-days: 7
+    groups:
+      backend-deps:
+        patterns:
+          - "*"
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    open-pull-requests-limit: 5
+    schedule:
+      interval: "weekly"
+    # Wait before proposing a freshly published version: hijacked releases
+    # (Axios, Shai-Hulud, ChainDrop...) are usually caught and pulled within days.
+    # Security updates are not delayed by this.
+    cooldown:
+      default-days: 7
+    groups:
+      docker-deps:
+        patterns:
+          - "*"
